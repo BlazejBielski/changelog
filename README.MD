@@ -1,0 +1,1 @@
+npm run dev (dev jest w package.json) - odpalenie servera
