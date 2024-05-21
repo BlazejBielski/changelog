@@ -3,7 +3,8 @@ import { Router } from 'express';
 const router = Router();
 
 router.get('/products', (req: any, res) => {
-    console.log('Trafiony')
+    console.log('Trafiony');
+    res.json({message: 'heh'})
 });
 router.get('/products/:id', () => {});
 router.post('/products', () => {});

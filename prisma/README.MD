@@ -11,3 +11,5 @@ DEPRECATED
 version String? - znak zapytania na końcu oznacza opcjonalne pole
 
 npx prisma migrate reset - wywala bazę
+
+npx prisma studio - podgląd danych

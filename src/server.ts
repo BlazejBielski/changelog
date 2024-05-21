@@ -2,6 +2,7 @@ import express from "express";
 import cors from 'cors';
 
 import router from './router';
+import {createNewUser} from "./handlers/user";
 
 
 const app = express();
@@ -12,8 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', router)
 
-app.get('/', (req, res) => {
-    res.json({message: "Hello Express"});
-})
+app.post('/users', createNewUser)
 
 export default app;
