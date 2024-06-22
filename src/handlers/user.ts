@@ -1,6 +1,5 @@
-import prisma from "../db"
-import {hash} from "node:crypto";
-import {createJWT, hashPassword} from "../modules/auth";
+import prisma from "../db";
+import {comparePasswords, createJWT, hashPassword} from "../modules/auth";
 
 export const createNewUser = async (req, res) => {
     const user = await prisma.user.create({
@@ -16,3 +15,22 @@ export const createNewUser = async (req, res) => {
 
     res.status(201).json({token});
 };
+
+export const signin = async (req, res) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            username: req.body.username
+        }
+    });
+
+    const isValid = await comparePasswords(req.body.password, user.password);
+
+    if (!isValid) {
+        res.status(401).json({message: "Invalid credentials."});
+        return;
+    }
+
+    const token = createJWT(user);
+    res.status(201).json({token});
+
+}
